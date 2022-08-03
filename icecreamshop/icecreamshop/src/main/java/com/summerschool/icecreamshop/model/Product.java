@@ -1,32 +1,28 @@
 package com.summerschool.icecreamshop.model;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
 public class Product {
+    @Id
     private int id;
     private String title;
     private String shortDescription;
     private String longDescription;
-    private String[] ingredients;
+    @ElementCollection
+    private List<String> ingredients = new ArrayList<>();
     private int quantity;
-    private String[] alergens;
+    @ElementCollection
+    private List<String> alergens = new ArrayList<>();
     private float price;
     private String currency;
     private String photoUrl;
     private ProductType type;
     private int categoryId;
-
-    public Product(int id, String title, String shortDescription, String longDescription, String[] ingredients, int quantity, String[] alergens, float price, String currency, String photoUrl, int category_id) {
-        this.id = id;
-        this.title = title;
-        this.shortDescription = shortDescription;
-        this.longDescription = longDescription;
-        this.ingredients = ingredients;
-        this.quantity = quantity;
-        this.alergens = alergens;
-        this.price = price;
-        this.currency = currency;
-        this.photoUrl = photoUrl;
-        this.categoryId = categoryId;
-    }
 
     public int getId() {
         return id;
@@ -60,11 +56,11 @@ public class Product {
         this.longDescription = longDescription;
     }
 
-    public String[] getIngredients() {
+    public List<String> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(String[] ingredients) {
+    public void setIngredients(List<String> ingredients) {
         this.ingredients = ingredients;
     }
 
@@ -76,11 +72,11 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public String[] getAlergens() {
+    public List<String> getAlergens() {
         return alergens;
     }
 
-    public void setAlergens(String[] alergens) {
+    public void setAlergens(List<String> alergens) {
         this.alergens = alergens;
     }
 
@@ -106,6 +102,14 @@ public class Product {
 
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
+    }
+
+    public ProductType getType() {
+        return type;
+    }
+
+    public void setType(ProductType type) {
+        this.type = type;
     }
 
     public int getCategoryId() {

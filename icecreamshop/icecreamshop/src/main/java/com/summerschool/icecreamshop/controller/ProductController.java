@@ -24,8 +24,13 @@ public class ProductController {
 
     @PatchMapping("/{productId}")
     public ResponseEntity<Product> update(@RequestBody Product product) {
-        //TODO verify all mandatory fields
-        if(true) {
+        if(product.getTitle() != null &&
+           product.getShortDescription() != null &&
+           product.getQuantity() != null &&
+           product.getPrice() != null &&
+           product.getCurrency() != null &&
+           product.getType() != null &&
+           product.getCategoryId() != null) {
             try {
                 return new ResponseEntity<> (productService.update(product), HttpStatus.OK);
             } catch (Exception exception) {

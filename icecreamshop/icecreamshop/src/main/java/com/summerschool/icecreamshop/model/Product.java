@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class Product {
     //Fields that are mandatory for valid product: title, shortDescription, quantity, price, currency, type, categoryId
     //Fields that are not mandatory for valid product: longDescription, ingredients, alergens, photoUrl
-    private enum Type {ICE_CREAM, GELATO, DONUTS, MERCHANDISE}
+    public enum Type {ICE_CREAM, GELATO, DONUTS, MERCHANDISE}
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

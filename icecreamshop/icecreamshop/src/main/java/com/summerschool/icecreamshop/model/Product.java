@@ -4,26 +4,41 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
 
 @Entity
 public class Product {
+    private enum Type {ICE_CREAM, GELATO, DONUTS, MERCHANDISE}
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String title;
     private String shortDescription;
-    private ArrayList<String> ingredients;
+    private String longDescription;
+    private String ingredients;
     private Integer quantity;
-    private ArrayList<String> alergens;
+    private String alergens;
     private Float price;
     private String currency;
     private String photoUrl;
+    private Type type;
     private Integer categoryId;
 
     public Product() {
+    }
+
+    public Product(Integer id, String title, String shortDescription, String longDescription, String ingredients, Integer quantity, String alergens, Float price, String currency, String photoUrl, Type type, Integer categoryId) {
+        this.id = id;
+        this.title = title;
+        this.shortDescription = shortDescription;
+        this.longDescription = longDescription;
+        this.ingredients = ingredients;
+        this.quantity = quantity;
+        this.alergens = alergens;
+        this.price = price;
+        this.currency = currency;
+        this.photoUrl = photoUrl;
+        this.type = type;
+        this.categoryId = categoryId;
     }
 
     public Integer getId() {
@@ -38,19 +53,6 @@ public class Product {
         return title;
     }
 
-    public Product(Integer id, String title, String shortDescription, ArrayList<String> ingredients, Integer quantity, ArrayList<String> alergens, Float price, String currency, String photoUrl, Integer categoryId) {
-        this.id = id;
-        this.title = title;
-        this.shortDescription = shortDescription;
-        this.ingredients = ingredients;
-        this.quantity = quantity;
-        this.alergens = alergens;
-        this.price = price;
-        this.currency = currency;
-        this.photoUrl = photoUrl;
-        this.categoryId = categoryId;
-    }
-
     public void setTitle(String title) {
         this.title = title;
     }
@@ -63,11 +65,19 @@ public class Product {
         this.shortDescription = shortDescription;
     }
 
-    public ArrayList<String> getIngredients() {
+    public String getLongDescription() {
+        return longDescription;
+    }
+
+    public void setLongDescription(String longDescription) {
+        this.longDescription = longDescription;
+    }
+
+    public String getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(ArrayList<String> ingredients) {
+    public void setIngredients(String ingredients) {
         this.ingredients = ingredients;
     }
 
@@ -79,11 +89,11 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public ArrayList<String> getAlergens() {
+    public String getAlergens() {
         return alergens;
     }
 
-    public void setAlergens(ArrayList<String> alergens) {
+    public void setAlergens(String alergens) {
         this.alergens = alergens;
     }
 
@@ -109,6 +119,14 @@ public class Product {
 
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public Integer getCategoryId() {

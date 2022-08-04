@@ -8,10 +8,10 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+
+
 @Entity
 public class Product {
-    //Fields that are mandatory for valid product: title, shortDescription, quantity, price, currency, type, categoryId
-    //Fields that are not mandatory for valid product: longDescription, ingredients, alergens, photoUrl
     public enum Type {ICE_CREAM, GELATO, DONUTS, MERCHANDISE}
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

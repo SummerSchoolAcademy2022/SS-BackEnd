@@ -5,7 +5,6 @@ import com.summerschool.icecreamshop.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.validation.Valid;
 import java.util.Optional;
 
 @Service
@@ -13,12 +12,8 @@ public class ProductService {
     @Autowired
     ProductRepository productRepository;
 
-    public @Valid Product update(Product product) throws Exception {
-         if (productRepository.findById(product.getId()).isEmpty()) {
-            throw new Exception("404 Not Request");
-        } else {
-            return productRepository.save(product);
-        }
+    public Product update(Product product) {
+        return productRepository.save(product);
     }
 
     public Optional<Product> findById(Integer id) {

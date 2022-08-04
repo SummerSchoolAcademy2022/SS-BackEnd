@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -23,11 +24,13 @@ public class ProductController {
     }
 
     @PatchMapping("/{productId}")
-    public ResponseEntity<Product> update(@RequestBody Product product) {
-        try {
-            return new ResponseEntity<> (productService.update(product), HttpStatus.OK);
-        } catch (Exception exception) {
+    public ResponseEntity<Product> update(@Valid @RequestBody Product product, @PathVariable Integer productId) {
+        if (!productId.equals(product.getId())) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        if (productService.findById(productId).isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        return new ResponseEntity<>(productService.update(product), HttpStatus.OK);
     }
 }

@@ -4,34 +4,22 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table
 public class Product {
-    @Id
-    private int id;
-    @Column
+    @Id @GeneratedValue
+    private long id;
     private String title;
-    @Column
     private String shortDescription;
-    @Column
     private String longDescription;
-    @Column
     private String ingredients;
-    @Column
     private int quantity;
-    @Column
     private String alergens;
-    @Column
-    private float price;
-    @Column
+    private double price;
     private String currency;
-    @Column
     private String photoUrl;
-    @Column
     private ProductType type;
-    @Column
     private int categoryId;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -87,11 +75,11 @@ public class Product {
         this.alergens = alergens;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -119,7 +107,7 @@ public class Product {
         this.type = type;
     }
 
-    public int getCategoryId() {
+    public long getCategoryId() {
         return categoryId;
     }
 

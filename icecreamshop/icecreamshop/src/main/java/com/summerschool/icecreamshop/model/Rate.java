@@ -3,20 +3,17 @@ package com.summerschool.icecreamshop.model;
 import javax.persistence.*;
 
 @Entity
-@Table
 public class Rate {
     @Id
-    private int id;
-    @Column
+    private long id;
     private int productId;
-    @Column
     private int rate;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -3,22 +3,19 @@ package com.summerschool.icecreamshop.model;
 import javax.persistence.*;
 
 @Entity
-@Table
 public class Category {
-    @Id
-    private int categoryId;
-    @Column
+    @Id @GeneratedValue
+    private long id;
     private String name;
-    @Column
     private String description;
 
 
-    public int getId() {
-        return categoryId;
+    public long getId() {
+        return id;
     }
 
     public void setId(int id) {
-        this.categoryId = id;
+        this.id = id;
     }
 
     public String getName() {

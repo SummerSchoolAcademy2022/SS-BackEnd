@@ -24,20 +24,10 @@ public class ProductController {
 
     @PatchMapping("/{productId}")
     public ResponseEntity<Product> update(@RequestBody Product product) {
-        if(product.getTitle() != null &&
-           product.getShortDescription() != null &&
-           product.getQuantity() != null &&
-           product.getPrice() != null &&
-           product.getCurrency() != null &&
-           product.getType() != null &&
-           product.getCategoryId() != null) {
-            try {
-                return new ResponseEntity<> (productService.update(product), HttpStatus.OK);
-            } catch (Exception exception) {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-        } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        try {
+            return new ResponseEntity<> (productService.update(product), HttpStatus.OK);
+        } catch (Exception exception) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }

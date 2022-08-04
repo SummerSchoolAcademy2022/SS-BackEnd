@@ -15,25 +15,24 @@ public class Product {
     public enum Type {ICE_CREAM, GELATO, DONUTS, MERCHANDISE}
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     private Integer id;
-    @NotBlank
+    @NotBlank(message = "title may be blank")
     private String title;
-    @NotBlank
+    @NotBlank(message = "shortDescription may be blank")
     private String shortDescription;
     private String longDescription;
     private String ingredients;
-    @NotNull
+    @NotNull(message = "quantity may be null")
     private Integer quantity;
     private String alergens;
-    @NotNull
+    @NotNull(message = "price may be null")
     private Float price;
-    @NotBlank
+    @NotBlank(message = "currency may be blank")
     private String currency;
     private String photoUrl;
-    @NotNull
+    @NotNull(message = "Type may be null")
     private Type type;
-    @NotNull
+    @NotNull(message = "categoryId may be null")
     private Integer categoryId;
 
     public Product() {

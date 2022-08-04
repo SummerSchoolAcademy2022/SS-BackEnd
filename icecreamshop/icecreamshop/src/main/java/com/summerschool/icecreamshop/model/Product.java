@@ -1,27 +1,34 @@
 package com.summerschool.icecreamshop.model;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import java.util.ArrayList;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table
 public class Product {
     @Id
     private int id;
+    @Column
     private String title;
+    @Column
     private String shortDescription;
+    @Column
     private String longDescription;
-    @ElementCollection
-    private List<String> ingredients = new ArrayList<>();
+    @Column
+    private String ingredients;
+    @Column
     private int quantity;
-    @ElementCollection
-    private List<String> alergens = new ArrayList<>();
+    @Column
+    private String alergens;
+    @Column
     private float price;
+    @Column
     private String currency;
+    @Column
     private String photoUrl;
+    @Column
     private ProductType type;
+    @Column
     private int categoryId;
 
     public int getId() {
@@ -56,11 +63,11 @@ public class Product {
         this.longDescription = longDescription;
     }
 
-    public List<String> getIngredients() {
+    public String getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(List<String> ingredients) {
+    public void setIngredients(String ingredients) {
         this.ingredients = ingredients;
     }
 
@@ -72,11 +79,11 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public List<String> getAlergens() {
+    public String getAlergens() {
         return alergens;
     }
 
-    public void setAlergens(List<String> alergens) {
+    public void setAlergens(String alergens) {
         this.alergens = alergens;
     }
 

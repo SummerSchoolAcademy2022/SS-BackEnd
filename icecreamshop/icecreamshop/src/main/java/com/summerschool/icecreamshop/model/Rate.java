@@ -1,13 +1,16 @@
-public class Rate {
-    private int id;
-    private int productId;
-    private int rate;
+package com.summerschool.icecreamshop.model;
 
-    public Rate(int id, int productId, int rate) {
-        this.id = id;
-        this.productId = productId;
-        this.rate = rate;
-    }
+import javax.persistence.*;
+
+@Entity
+@Table
+public class Rate {
+    @Id
+    private int id;
+    @Column
+    private int productId;
+    @Column
+    private int rate;
 
     public int getId() {
         return id;

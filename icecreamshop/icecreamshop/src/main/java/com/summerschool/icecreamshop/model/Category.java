@@ -1,22 +1,24 @@
 package com.summerschool.icecreamshop.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table
 public class Category {
-    private int id;
+    @Id
+    private int categoryId;
+    @Column
     private String name;
+    @Column
     private String description;
 
-    public Category(int id, String name, String description) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-    }
 
     public int getId() {
-        return id;
+        return categoryId;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.categoryId = id;
     }
 
     public String getName() {

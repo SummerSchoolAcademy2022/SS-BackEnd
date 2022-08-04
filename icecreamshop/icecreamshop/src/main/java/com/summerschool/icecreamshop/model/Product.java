@@ -1,9 +1,12 @@
 package com.summerschool.icecreamshop.model;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Product {
@@ -12,17 +15,25 @@ public class Product {
     public enum Type {ICE_CREAM, GELATO, DONUTS, MERCHANDISE}
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
     private Integer id;
+    @NotBlank
     private String title;
+    @NotBlank
     private String shortDescription;
     private String longDescription;
     private String ingredients;
+    @NotNull
     private Integer quantity;
     private String alergens;
+    @NotNull
     private Float price;
+    @NotBlank
     private String currency;
     private String photoUrl;
+    @NotNull
     private Type type;
+    @NotNull
     private Integer categoryId;
 
     public Product() {

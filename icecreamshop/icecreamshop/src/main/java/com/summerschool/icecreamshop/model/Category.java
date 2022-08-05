@@ -10,7 +10,7 @@ public class Category {
     private long id;
     private String name;
     private String description;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Product> product;
 
 

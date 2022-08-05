@@ -13,8 +13,6 @@ public class Category {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Product> product;
 
-
-
     public long getId() {
         return id;
     }

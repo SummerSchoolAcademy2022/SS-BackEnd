@@ -1,7 +1,6 @@
 package com.summerschool.icecreamshop.model;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Rate {
@@ -11,7 +10,7 @@ public class Rate {
     private int rate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="productId", nullable=false)
+    @JoinColumn(name = "productId", nullable = false)
     private Product product;
 
     public long getId() {

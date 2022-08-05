@@ -19,7 +19,7 @@ public class Product {
     private String photoUrl;
     private ProductType type;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="categoryId", nullable=false)
+    @JoinColumn(name = "categoryId", nullable = false)
     private Category category;
 
     @OneToMany(fetch = FetchType.EAGER)

@@ -33,7 +33,7 @@ class ProductControllerTest {
 
         Integer idProduct = 1;
         Product product = new Product();
-        product.setId(idProduct);
+        product.setId(Long.valueOf(idProduct));
 
         Mockito.when(productService.findById(idProduct)).thenReturn(Optional.of(product));
 

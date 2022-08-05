@@ -34,6 +34,6 @@ public class CategoryController {
     @PostMapping("/category")
     private int saveCategory(@RequestBody Category category) {
         categoryService.saveOrUpdate(category);
-        return category.getId();
+        return (int) category.getId();
     }
 }

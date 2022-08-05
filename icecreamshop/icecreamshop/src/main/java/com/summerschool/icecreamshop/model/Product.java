@@ -5,7 +5,8 @@ import java.util.List;
 
 @Entity
 public class Product {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private long id;
     private String title;
     private String shortDescription;
@@ -17,16 +18,11 @@ public class Product {
     private String currency;
     private String photoUrl;
     private ProductType type;
-
-//    @OneToMany(cascade = CascadeType.ALL,
-//            fetch = FetchType.LAZY)
-//    private List<Category> category;
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="categoryId", nullable=false)
     private Category category;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Rate> rate;
 
     public long getId() {

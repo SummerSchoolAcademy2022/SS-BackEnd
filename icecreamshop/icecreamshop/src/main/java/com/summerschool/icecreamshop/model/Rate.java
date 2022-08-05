@@ -9,7 +9,7 @@ public class Rate {
     private long id;
     private int rate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name="productId", nullable=false)
     private Product product;
 

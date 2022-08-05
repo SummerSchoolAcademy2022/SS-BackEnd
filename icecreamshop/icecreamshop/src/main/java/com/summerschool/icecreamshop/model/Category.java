@@ -5,15 +5,12 @@ import java.util.List;
 
 @Entity
 public class Category {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private long id;
     private String name;
     private String description;
-
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    private Product product;
-    @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Product> product;
 
 

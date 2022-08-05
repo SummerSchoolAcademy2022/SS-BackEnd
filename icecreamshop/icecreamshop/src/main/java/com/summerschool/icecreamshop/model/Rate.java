@@ -7,7 +7,7 @@ import java.util.List;
 public class Rate {
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
     private int rate;
 
     @ManyToOne(fetch = FetchType.LAZY)

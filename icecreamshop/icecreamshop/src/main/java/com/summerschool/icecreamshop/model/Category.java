@@ -7,7 +7,7 @@ import java.util.List;
 public class Category {
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
     private String name;
     private String description;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

@@ -17,13 +17,23 @@ public class Product {
     private String currency;
     private String photoUrl;
     private ProductType type;
-    private int categoryId;
+
+//    @OneToMany(cascade = CascadeType.ALL,
+//            fetch = FetchType.LAZY)
+//    private List<Category> category;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="categoryId", nullable=false)
+    private Category category;
+
+    @OneToMany
+    private List<Rate> rate;
 
     public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -107,11 +117,19 @@ public class Product {
         this.type = type;
     }
 
-    public long getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public List<Rate> getRate() {
+        return rate;
+    }
+
+    public void setRate(List<Rate> rate) {
+        this.rate = rate;
     }
 }

@@ -1,6 +1,7 @@
 package com.summerschool.icecreamshop.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Category {
@@ -8,6 +9,13 @@ public class Category {
     private long id;
     private String name;
     private String description;
+
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    private Product product;
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+    private List<Product> product;
+
 
 
     public long getId() {

@@ -1,13 +1,17 @@
 package com.summerschool.icecreamshop.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Rate {
     @Id
     private long id;
-    private int productId;
     private int rate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="productId", nullable=false)
+    private Product product;
 
     public long getId() {
         return id;
@@ -17,12 +21,12 @@ public class Rate {
         this.id = id;
     }
 
-    public int getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public int getRate() {

@@ -22,6 +22,9 @@ public class Product {
     @JoinColumn(name = "categoryId", nullable = false)
     private Category category;
 
+    @OneToMany(fetch = FetchType.EAGER )
+    private List<BasketProduct> basketProducts;
+
     @OneToMany(fetch = FetchType.EAGER)
     private List<Rate> rate;
 

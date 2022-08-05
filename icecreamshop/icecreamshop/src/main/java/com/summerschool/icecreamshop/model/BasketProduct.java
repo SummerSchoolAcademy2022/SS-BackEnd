@@ -1,43 +1,67 @@
 package com.summerschool.icecreamshop.model;
 
-    public  class BasketProduct{
-        private Long id;
-        private Long productId;
-        private Double price;
-        private Integer quantity;
+import javax.persistence.*;
+import java.util.List;
 
-        public Long getId() {
-            return id;
-        }
+@Entity
+public class BasketProduct {
+   // @Id
+   // Integer idPk;
 
-        public void setId(Long id) {
-            this.id = id;
-        }
+    @ManyToOne(fetch = FetchType.EAGER,optional = false)
+    @JoinColumn(name = "PRODUCT_ID", nullable = false)
+    private Product product;
 
-        public Long getProductId() {
-            return productId;
-        }
+    @ManyToOne(fetch = FetchType.EAGER,optional = false)
+    @JoinColumn(name = "ID", nullable = false)
+    private Basket basket;
 
-        public void setProductId(Long productId) {
-            this.productId = productId;
-        }
+    private List<Product> products;
 
-        public Double getPrice() {
-            return price;
-        }
+    private Double price;
+    private Integer quantity;
+    private Basket id;
 
-        public void setPrice(Double price) {
-            this.price = price;
-        }
-
-        public Integer getQuantity() {
-            return quantity;
-        }
-
-        public void setQuantity(Integer quantity) {
-            this.quantity = quantity;
-        }
+    public Basket getId() {
+        return id;
     }
+
+    public void setId(Basket id) {
+        this.id = id;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+}
 
 
 

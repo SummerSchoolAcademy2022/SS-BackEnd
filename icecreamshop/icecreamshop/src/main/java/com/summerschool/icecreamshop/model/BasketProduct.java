@@ -1,54 +1,42 @@
 package com.summerschool.icecreamshop.model;
 
-
-
-
-
     public  class BasketProduct{
         private Long id;
-        private Long productid;
+        private Long productId;
         private Double price;
         private Integer quantity;
 
-        public Long getId(){
+        public Long getId() {
             return id;
         }
-        public void setId(Long id)
-        {
-            this.id=id;
+
+        public void setId(Long id) {
+            this.id = id;
         }
 
-        public Long getProductid()
-        {
-            return productid;
+        public Long getProductId() {
+            return productId;
         }
 
-        public void setProductid(Long productid)
-        {
-            this.productid=productid;
+        public void setProductId(Long productId) {
+            this.productId = productId;
         }
-        public Double getPrice(){
+
+        public Double getPrice() {
             return price;
         }
-        public void setPrice(Double price){
-            this.price=price;
-        }
-        public Integer getQuantity(){
-            return quantity;
-        }
-        public void setQuantity(Integer quantity){
-            this.quantity=quantity;
-        }
 
-        public BasketProduct(Long id, Long  productId,  Integer quantity, Double price) {
-            this.id = id;
-            this.productId = productId;
-            this.quantity = quantity;
+        public void setPrice(Double price) {
             this.price = price;
         }
 
+        public Integer getQuantity() {
+            return quantity;
+        }
 
-
+        public void setQuantity(Integer quantity) {
+            this.quantity = quantity;
+        }
     }
 
 

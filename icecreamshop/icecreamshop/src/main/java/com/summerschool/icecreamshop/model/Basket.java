@@ -3,28 +3,30 @@ import java.util.List;
 
 public class Basket {
     private Integer id;
-    private String sessionid;
+    private String sessionId;
     private List<BasketProduct> basketProductList;
+
     public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id){
-        this.id=id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getSessionid(){
-        return sessionid;
+    public String getSessionId() {
+        return sessionId;
     }
 
-    public void setSessionid(String sessionid){
-        this.sessionid=sessionid;
-
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
     }
 
-     Basket b= new Basket(Integer id, String sessionid){
-        this.id=id;
-        this.sessionid=sessionid;
-     }
+    public List<BasketProduct> getBasketProductList() {
+        return basketProductList;
+    }
 
+    public void setBasketProductList(List<BasketProduct> basketProductList) {
+        this.basketProductList = basketProductList;
+    }
 }

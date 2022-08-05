@@ -1,12 +1,19 @@
 package com.summerschool.icecreamshop.model;
 
+import javax.persistence.*;
+
+@Entity
+public  class BasketProduct{
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    @Id
 
 
+    private Long id;
 
+    //@JoinColumn(name = "product_id")
+    //@ManyToOne(fetch = FetchType.EAGER)
 
-    public  class BasketProduct{
-        private Long id;
-        private Long productid;
+        private Long productId;
         private Double price;
         private Integer quantity;
 
@@ -20,12 +27,12 @@ package com.summerschool.icecreamshop.model;
 
         public Long getProductid()
         {
-            return productid;
+            return productId;
         }
 
         public void setProductid(Long productid)
         {
-            this.productid=productid;
+            this.productId=productId;
         }
         public Double getPrice(){
             return price;
@@ -40,11 +47,8 @@ package com.summerschool.icecreamshop.model;
             this.quantity=quantity;
         }
 
-        public BasketProduct(Long id, Long  productId,  Integer quantity, Double price) {
-            this.id = id;
-            this.productId = productId;
-            this.quantity = quantity;
-            this.price = price;
+        public BasketProduct() {
+
         }
 
 

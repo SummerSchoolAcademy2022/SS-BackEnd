@@ -1,30 +1,40 @@
 package com.summerschool.icecreamshop.model;
-import java.util.List;
 
+import javax.persistence.*;
+import java.util.List;
+@Entity
 public class Basket {
-    private Integer id;
-    private String sessionid;
+    @GeneratedValue (strategy= GenerationType.AUTO)
+    @Id
+    private Long id;
+
+    @OneToMany
     private List<BasketProduct> basketProductList;
-    public Integer getId() {
+    private String sessionId;
+    public Basket(){
+    }
+    public List<BasketProduct> getBasketProductList() {
+        return basketProductList;
+    }
+    public void setBasketProductList(List <BasketProduct> basketProductList){
+        this.basketProductList= basketProductList;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id){
+    public void setId(Long id){
         this.id=id;
     }
 
-    public String getSessionid(){
-        return sessionid;
+    public String getSessionId(){
+        return sessionId;
     }
 
-    public void setSessionid(String sessionid){
-        this.sessionid=sessionid;
+    public void setSessionId(String sessionId){
+        this.sessionId=sessionId;
+
 
     }
-
-     Basket b= new Basket(Integer id, String sessionid){
-        this.id=id;
-        this.sessionid=sessionid;
-     }
-
 }

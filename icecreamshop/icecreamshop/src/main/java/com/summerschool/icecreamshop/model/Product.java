@@ -1,38 +1,35 @@
 package com.summerschool.icecreamshop.model;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
 public class Product {
-    private int id;
+    @Id
+    @GeneratedValue
+    private Long id;
     private String title;
     private String shortDescription;
     private String longDescription;
-    private String[] ingredients;
+    private String ingredients;
     private int quantity;
-    private String[] alergens;
-    private float price;
+    private String alergens;
+    private double price;
     private String currency;
     private String photoUrl;
     private ProductType type;
-    private int categoryId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "categoryId", nullable = false)
+    private Category category;
 
-    public Product(int id, String title, String shortDescription, String longDescription, String[] ingredients, int quantity, String[] alergens, float price, String currency, String photoUrl, int category_id) {
-        this.id = id;
-        this.title = title;
-        this.shortDescription = shortDescription;
-        this.longDescription = longDescription;
-        this.ingredients = ingredients;
-        this.quantity = quantity;
-        this.alergens = alergens;
-        this.price = price;
-        this.currency = currency;
-        this.photoUrl = photoUrl;
-        this.categoryId = categoryId;
-    }
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<Rate> rate;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -60,11 +57,11 @@ public class Product {
         this.longDescription = longDescription;
     }
 
-    public String[] getIngredients() {
+    public String getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(String[] ingredients) {
+    public void setIngredients(String ingredients) {
         this.ingredients = ingredients;
     }
 
@@ -76,19 +73,19 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public String[] getAlergens() {
+    public String getAlergens() {
         return alergens;
     }
 
-    public void setAlergens(String[] alergens) {
+    public void setAlergens(String alergens) {
         this.alergens = alergens;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -108,11 +105,27 @@ public class Product {
         this.photoUrl = photoUrl;
     }
 
-    public int getCategoryId() {
-        return categoryId;
+    public ProductType getType() {
+        return type;
     }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+    public void setType(ProductType type) {
+        this.type = type;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public List<Rate> getRate() {
+        return rate;
+    }
+
+    public void setRate(List<Rate> rate) {
+        this.rate = rate;
     }
 }

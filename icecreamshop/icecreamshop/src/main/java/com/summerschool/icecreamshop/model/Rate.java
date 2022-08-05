@@ -1,28 +1,32 @@
+package com.summerschool.icecreamshop.model;
+
+import javax.persistence.*;
+
+@Entity
 public class Rate {
-    private int id;
-    private int productId;
+    @Id
+    @GeneratedValue
+    private Long id;
     private int rate;
 
-    public Rate(int id, int productId, int rate) {
-        this.id = id;
-        this.productId = productId;
-        this.rate = rate;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "productId", nullable = false)
+    private Product product;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public int getRate() {

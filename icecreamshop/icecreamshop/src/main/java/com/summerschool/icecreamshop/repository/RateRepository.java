@@ -1,4 +1,6 @@
 package com.summerschool.icecreamshop.repository;
 
-public class RateRepository {
+import org.springframework.data.repository.CrudRepository;
+
+public interface RateRepository extends CrudRepository<Integer, RateRepository> {
 }

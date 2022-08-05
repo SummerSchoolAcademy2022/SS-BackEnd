@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface  BasketRepository
         extends JpaRepository<Basket, Long> {
 
+    void update(Basket request);
 }

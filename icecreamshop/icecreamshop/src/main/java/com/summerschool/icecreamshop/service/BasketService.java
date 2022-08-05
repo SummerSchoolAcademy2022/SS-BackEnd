@@ -45,9 +45,9 @@ public class BasketService {
     }
 
     public void deleteById(Long id) {
-        Optional<Basket> employee = basketRepository.findById(id);
+        Optional<Basket> basket = basketRepository.findById(id);
 
-        if (employee.isPresent()) {
+        if (basket.isPresent()) {
             basketRepository.deleteById(id);
         } else {
             throw new ResourceNotFoundException("Error 404 nu s-a gasit cos dupa id");
@@ -56,5 +56,23 @@ public class BasketService {
 
     void deleteAll() {
         basketRepository.deleteAll();
+    }
+
+    public Basket update(Basket request, long basketId) {
+
+        if (basketRepository.findById(basketId).isPresent()) {
+            request.setId(basketId);
+            basketRepository.update(request);
+
+        } else {
+            throw new ResourceNotFoundException("Error 404 nu s-a gasit cos dupa id");
+        }
+        return basketRepository.findById(basketId).get();
+
+    }
+
+    public Basket findById(Long basketId) {
+         return  basketRepository.findById(basketId)
+                                 .orElseThrow(() -> new ResourceNotFoundException( "Error 404 basket not found"));
     }
 }

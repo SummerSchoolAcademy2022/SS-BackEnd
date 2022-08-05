@@ -8,14 +8,11 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-
-
 @Entity
 public class Product {
-    public enum Type {ICE_CREAM, GELATO, DONUTS, MERCHANDISE}
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     @NotBlank(message = "title may be blank")
     private String title;
     @NotBlank(message = "shortDescription may be blank")
@@ -31,33 +28,18 @@ public class Product {
     private String currency;
     private String photoUrl;
     @NotNull(message = "Type may be null")
-    private Type type;
+    private ProductType type;
     @NotNull(message = "categoryId may be null")
-    private Integer categoryId;
+    private Long categoryId;
 
     public Product() {
     }
 
-    public Product(Integer id, String title, String shortDescription, String longDescription, String ingredients, Integer quantity, String alergens, Float price, String currency, String photoUrl, Type type, Integer categoryId) {
-        this.id = id;
-        this.title = title;
-        this.shortDescription = shortDescription;
-        this.longDescription = longDescription;
-        this.ingredients = ingredients;
-        this.quantity = quantity;
-        this.alergens = alergens;
-        this.price = price;
-        this.currency = currency;
-        this.photoUrl = photoUrl;
-        this.type = type;
-        this.categoryId = categoryId;
-    }
-
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -133,19 +115,19 @@ public class Product {
         this.photoUrl = photoUrl;
     }
 
-    public Type getType() {
+    public ProductType getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(ProductType type) {
         this.type = type;
     }
 
-    public Integer getCategoryId() {
+    public Long getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Integer categoryId) {
+    public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
     }
 }

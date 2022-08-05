@@ -4,8 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.summerschool.icecreamshop.controller.ProductController;
 import com.summerschool.icecreamshop.model.Product;
+import com.summerschool.icecreamshop.model.ProductType;
 import com.summerschool.icecreamshop.service.ProductService;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
@@ -19,11 +21,11 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.util.Optional;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.util.Optional;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(ProductController.class)
@@ -38,24 +40,39 @@ class ProductControllerTest {
     @Autowired
     MockMvc mockMvc;
 
+    private Product validProduct;
+
+    @BeforeEach
+    private void setUp() {
+        validProduct = new Product();
+        validProduct.setId(1L);
+        validProduct.setTitle("Vanilla ice cream");
+        validProduct.setShortDescription("Tasty");
+        validProduct.setIngredients("Milk, vanilla extract");
+        validProduct.setQuantity(100);
+        validProduct.setAlergens("Milk");
+        validProduct.setPrice(5.99f);
+        validProduct.setCurrency("lei");
+        validProduct.setType(ProductType.ICE_CREAM);
+        validProduct.setCategoryId(100L);
+    }
+
     @Test
     void givenId_WhenFindById_ThenStatusIsOk() throws Exception {
 
-        Integer idProduct = 1;
-        Product product = new Product();
-        product.setId(idProduct);
+        Long idProduct = validProduct.getId();
 
-        Mockito.when(productService.findById(idProduct)).thenReturn(Optional.of(product));
+        Mockito.when(productService.findById(idProduct)).thenReturn(Optional.of(validProduct));
 
         mockMvc.perform(get("/products/" + idProduct))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("id", Matchers.is(idProduct)));
+                .andExpect(jsonPath("id", Matchers.is(idProduct), Long.class));
     }
 
     @Test
     void givenId_WhenFindById_ThenStatusIsNotFound() throws Exception {
 
-        Integer idProduct = -100;
+        Long idProduct = -100L;
 
         Mockito.when(productService.findById(idProduct)).thenReturn(Optional.empty());
 
@@ -66,13 +83,12 @@ class ProductControllerTest {
     @Test
     void givenValidProduct_WhenUpdate_ThenStatusIsOk() throws Exception {
 
-        Product product = buildValidProduct();
-        Integer idProduct = product.getId();
+        Long idProduct = validProduct.getId();
 
-        Mockito.when(productService.findById(idProduct)).thenReturn(Optional.of(product));
-        Mockito.when(productService.update(product)).thenReturn(product);
+        Mockito.when(productService.findById(idProduct)).thenReturn(Optional.of(validProduct));
+        Mockito.when(productService.update(validProduct, idProduct)).thenReturn(validProduct);
 
-        MockHttpServletRequestBuilder builder = buildMockPatch(idProduct, product);
+        MockHttpServletRequestBuilder builder = buildMockPatch(idProduct, validProduct);
 
         this.mockMvc.perform(builder)
                 .andExpect(MockMvcResultMatchers.status()
@@ -82,14 +98,13 @@ class ProductControllerTest {
     @Test
     void givenInvalidProduct_WhenUpdate_ThenStatusIsBadRequest() throws Exception {
 
-        Product product = buildValidProduct();
-        product.setTitle(null);
-        Integer idProduct = product.getId();
+        validProduct.setTitle(null);
+        Long idProduct = validProduct.getId();
 
-        Mockito.when(productService.findById(idProduct)).thenReturn(Optional.of(product));
-        Mockito.when(productService.update(product)).thenReturn(product);
+        Mockito.when(productService.findById(idProduct)).thenReturn(Optional.of(validProduct));
+        Mockito.when(productService.update(validProduct, idProduct)).thenReturn(validProduct);
 
-        MockHttpServletRequestBuilder builder = buildMockPatch(idProduct, product);
+        MockHttpServletRequestBuilder builder = buildMockPatch(idProduct, validProduct);
 
         this.mockMvc.perform(builder)
                 .andExpect(MockMvcResultMatchers.status()
@@ -100,56 +115,23 @@ class ProductControllerTest {
     @Test
     void givenNotExistingProduct_WhenUpdate_ThenStatusIsNotFound() throws Exception {
 
-        Product product = buildValidProduct();
-        Integer idProduct = product.getId();
+        Long idProduct = validProduct.getId();
 
         Mockito.when(productService.findById(idProduct)).thenReturn(Optional.empty());
-        Mockito.when(productService.update(product)).thenReturn(product);
+        Mockito.when(productService.update(validProduct, idProduct)).thenReturn(validProduct);
 
-        MockHttpServletRequestBuilder builder = buildMockPatch(idProduct, product);
+        MockHttpServletRequestBuilder builder = buildMockPatch(idProduct, validProduct);
 
         this.mockMvc.perform(builder)
                 .andExpect(MockMvcResultMatchers.status()
                         .isNotFound());
     }
 
-    @Test
-    void givenIdFromPathIsNotEqualWithIdFromProduct_WhenUpdate_ThenStatusIsBadRequest() throws Exception {
-        // given id from path != id from product when update
-
-        Product product = buildValidProduct();
-        Integer idProduct = product.getId() - 1;
-
-        Mockito.when(productService.findById(idProduct)).thenReturn(Optional.empty());
-        Mockito.when(productService.update(product)).thenReturn(product);
-
-        MockHttpServletRequestBuilder builder = buildMockPatch(idProduct, product);
-
-        this.mockMvc.perform(builder)
-                .andExpect(MockMvcResultMatchers.status()
-                        .isBadRequest());
-    }
-
-    private Product buildValidProduct() {
-        Product product = new Product();
-        product.setId(1);
-        product.setTitle("Vanilla ice cream");
-        product.setShortDescription("Tasty");
-        product.setIngredients("Milk, vanilla extract");
-        product.setQuantity(100);
-        product.setAlergens("Milk");
-        product.setPrice(5.99f);
-        product.setCurrency("lei");
-        product.setType(Product.Type.ICE_CREAM);
-        product.setCategoryId(100);
-        return product;
-    }
-
     /**
      * I inspired myself from:
      * https://www.logicbig.com/tutorials/spring-framework/spring-web-mvc/http-patch-test.html
      */
-    private MockHttpServletRequestBuilder buildMockPatch(Integer idProduct, Product product) throws JsonProcessingException {
+    private MockHttpServletRequestBuilder buildMockPatch(Long idProduct, Product product) throws JsonProcessingException {
         return MockMvcRequestBuilders.patch("/products/" + idProduct)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .accept(MediaType.APPLICATION_JSON)

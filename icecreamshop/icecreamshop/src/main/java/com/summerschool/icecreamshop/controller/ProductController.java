@@ -18,19 +18,16 @@ public class ProductController {
     ProductService productService;
 
     @GetMapping("/{productId}")
-    public ResponseEntity<Product> readById(@PathVariable Integer productId) {
+    public ResponseEntity<Product> readById(@PathVariable Long productId) {
         Optional<Product> optionalProduct = productService.findById(productId);
         return optionalProduct.map(product -> new ResponseEntity<>(product, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PatchMapping("/{productId}")
-    public ResponseEntity<Product> update(@Valid @RequestBody Product product, @PathVariable Integer productId) {
-        if (!productId.equals(product.getId())) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<Product> update(@Valid @RequestBody Product product, @PathVariable Long productId) {
         if (productService.findById(productId).isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(productService.update(product), HttpStatus.OK);
+        return new ResponseEntity<>(productService.update(product, productId), HttpStatus.OK);
     }
 }

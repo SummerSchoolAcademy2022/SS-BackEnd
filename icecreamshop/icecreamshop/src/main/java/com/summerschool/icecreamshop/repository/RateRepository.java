@@ -1,6 +1,9 @@
 package com.summerschool.icecreamshop.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import com.summerschool.icecreamshop.model.Rate;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface RateRepository extends CrudRepository<Integer, RateRepository> {
+@Repository
+public interface RateRepository extends JpaRepository<Rate, Integer> {
 }

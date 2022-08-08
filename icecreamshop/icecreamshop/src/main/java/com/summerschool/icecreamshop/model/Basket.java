@@ -1,25 +1,23 @@
 package com.summerschool.icecreamshop.model;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Basket {
     @Id
     @GeneratedValue
-    private Integer id;
+    private Long id;
     private String sessionId;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "productId", nullable = false)
-    private List<BasketProduct> basketProductList;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<BasketProduct> basketProducts;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BasketProduct> basketProduct = new ArrayList<>();
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -31,11 +29,11 @@ public class Basket {
         this.sessionId = sessionId;
     }
 
-    public List<BasketProduct> getBasketProductList() {
-        return basketProductList;
+    public List<BasketProduct> getBasketProduct() {
+        return basketProduct;
     }
 
-    public void setBasketProductList(List<BasketProduct> basketProductList) {
-        this.basketProductList = basketProductList;
+    public void setBasketProduct(List<BasketProduct> basketProduct) {
+        this.basketProduct = basketProduct;
     }
 }

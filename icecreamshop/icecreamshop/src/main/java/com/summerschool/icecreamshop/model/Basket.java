@@ -10,7 +10,7 @@ public class Basket {
     private Long id;
     private String sessionId;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BasketProduct> basketProduct = new ArrayList<>();
 
     public Long getId() {

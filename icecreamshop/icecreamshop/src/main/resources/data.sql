@@ -87,17 +87,17 @@ INSERT INTO RATE(id,  product_id, rate)
 VALUES (16, 8, 5);
 
 INSERT INTO BASKET(id, session_id)
-VALUES(1,1)
+VALUES(1,1);
 
 INSERT INTO BASKET(id, session_id)
-VALUES(2,1)
+VALUES(2,1);
 
 
 INSERT INTO BASKET_PRODUCT(id, product_id, basket_id, quantity, price)
-VALUES(1,1,2,1,4.0)
+VALUES(1,1,2,3,4.0);
 
 INSERT INTO BASKET_PRODUCT(id, product_id, basket_id ,quantity, price)
-VALUES(2,2,3,2,3.0)
+VALUES(2,2,1,3,3.0);
 
 
 

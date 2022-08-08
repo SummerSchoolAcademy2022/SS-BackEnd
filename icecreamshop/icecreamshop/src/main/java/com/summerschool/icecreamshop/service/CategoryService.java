@@ -23,7 +23,7 @@ public class CategoryService {
     }
 
     //getting a specific record
-    public Category getCategoryById(int id) {
+    public Category getCategoryById(Long id) {
         return categoryRepository.findById(id).get();
     }
 
@@ -32,7 +32,7 @@ public class CategoryService {
     }
 
     //deleting a specific record
-    public void delete(int id) {
+    public void delete(Long id) {
         categoryRepository.deleteById(id);
     }
 }

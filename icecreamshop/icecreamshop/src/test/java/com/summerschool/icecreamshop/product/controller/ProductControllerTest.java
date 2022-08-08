@@ -31,7 +31,7 @@ class ProductControllerTest {
     @Test
     void givenIdWhenFindByIdThenStatusIsOk() throws Exception {
 
-        Integer idProduct = 1;
+        Long idProduct = 1L;
         Product product = new Product();
         product.setId(Long.valueOf(idProduct));
 
@@ -45,7 +45,7 @@ class ProductControllerTest {
     @Test
     void givenIdWhenFindByIdThenStatusIsNotFound() throws Exception {
 
-        Integer idProduct = -100;
+        Long idProduct = -100L;
 
         Mockito.when(productService.findById(idProduct)).thenReturn(Optional.empty());
 

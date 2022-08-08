@@ -78,5 +78,18 @@ VALUES (15, 8, 5);
 INSERT INTO RATE(id,  productId, rate)
 VALUES (16, 8, 5);
 
+INSERT INTO BASKET(id, sessionId, listOfBasketProduct)
+VALUES(1,1,' ')
+
+INSERT INTO BASKET(id, sessionId, listOfBasketProduct)
+VALUES(2,1,' ')
+
+
+INSERT INTO BASKETPRODUCT(id, productId, quantity, price)
+VALUES(1,1,2,4.0)
+
+INSERT INTO BASKETPRODUCT(id, productId, quantity, price)
+VALUES(2,2,3,3.0)
+
 
 

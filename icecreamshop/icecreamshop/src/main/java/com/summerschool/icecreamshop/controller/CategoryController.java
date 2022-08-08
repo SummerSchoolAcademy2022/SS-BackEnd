@@ -20,13 +20,13 @@ public class CategoryController {
 
     //creating a get mapping that retrieves the detail of a specific student
     @GetMapping("/category/{id}")
-    private Category getCategory(@PathVariable("id") int id) {
+    private Category getCategory(@PathVariable("id") Long id) {
         return categoryService.getCategoryById(id);
     }
 
     //creating a delete mapping that deletes a specific student
     @DeleteMapping("/category/{id}")
-    private void deleteCategory(@PathVariable("id") int id) {
+    private void deleteCategory(@PathVariable("id") Long id) {
         categoryService.delete(id);
     }
 

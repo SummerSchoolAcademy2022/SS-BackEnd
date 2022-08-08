@@ -1,22 +1,23 @@
 package com.summerschool.icecreamshop.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table
 public class Category {
     @Id
-    private int id;
-    @Column
+    @GeneratedValue
+    private Long id;
     private String name;
-    @Column
     private String description;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Product> product;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

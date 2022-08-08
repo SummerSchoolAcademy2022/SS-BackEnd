@@ -10,8 +10,11 @@ VALUES (3, 'DONUTS', 'Delicious donuts!');
 INSERT INTO CATEGORY (id, name, description)
 VALUES (4, 'MERCHANDISE', 'Cool merch.');
 
--- INSERT INTO PRODUCT(id,title, shortDescription, longDescription, ingredients, quantity, alergens, price, currency, photoUrl, type, categoryId)
--- VALUES(1,'Pistachio Ice Cream','Sweet, cold, and creamy with a chance of Pistachio flavour','Treat yourself to ice cream infused with smooth Bourbon sprinkled with pistachio and vanilla','egg yolks, sugar, heavy cream, evaporate milk,teaspoon salt, teaspoons vanilla extract,teaspoon pure almond extract, shelled pistachios, roughly chopped',10,'Milk, egg',2.0,'$','../../assets/icecream.png','Ice cream',1);
+INSERT INTO PRODUCT(ID, TITLE, SHORT_DESCRIPTION, LONG_DESCRIPTION, INGREDIENTS, QUANTITY, ALERGENS, PRICE, CURRENCY, PHOTO_URL, TYPE, CATEGORY_ID)
+VALUES (1,'A','B','C','D',1,'E',10,'F','H', 1,1);
+
+INSERT INTO PRODUCT(ID, TITLE, SHORT_DESCRIPTION, LONG_DESCRIPTION, INGREDIENTS, QUANTITY, ALERGENS, PRICE, CURRENCY, PHOTO_URL, TYPE, CATEGORY_ID)
+VALUES(1,'Pistachio Ice Cream','Sweet, cold, and creamy with a chance of Pistachio flavour','Treat yourself to ice cream infused with smooth Bourbon sprinkled with pistachio and vanilla','egg yolks, sugar, heavy cream, evaporate milk,teaspoon salt, teaspoons vanilla extract,teaspoon pure almond extract, shelled pistachios, roughly chopped',10,'Milk, egg',2.0,'$','../../assets/icecream.png',1,1);
 -- INSERT INTO PRODUCT(id,title, shortDescription, longDescription, ingredients, quantity, alergens, price, currency, photoUrl, type, categoryId)
 -- VALUES(2,'Watermelon Ice Cream','Fill your tummy with a yummy Watermelon Ice Cream','Treat yourself to ice cream infused with smooth Bourbon sprinkled with fresh watermelon','egg yolks, granulated sugar, heavy cream, evaporate milk, teaspoon salt, teaspoon pure, watermelon',30,'Milk, egg',1.0,'$','../../assets/icecream.png','Ice cream',1);
 -- INSERT INTO PRODUCT(id,title, shortDescription, longDescription, ingredients, quantity, alergens, price, currency, photoUrl, type, categoryId)

@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -31,11 +32,16 @@ public class Product {
     private String photoUrl;
     @NotNull(message = "Type may be null")
     private ProductType type;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "categoryId", nullable = false)
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", nullable = false)
     private Category category;
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<Rate> rate;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BasketProduct> basketProduct = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Rate> rate = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -131,6 +137,14 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public List<BasketProduct> getBasketProduct() {
+        return basketProduct;
+    }
+
+    public void setBasketProduct(List<BasketProduct> basketProduct) {
+        this.basketProduct = basketProduct;
     }
 
     public List<Rate> getRate() {

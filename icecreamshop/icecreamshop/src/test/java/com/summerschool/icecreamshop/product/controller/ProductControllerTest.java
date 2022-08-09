@@ -54,7 +54,6 @@ class ProductControllerTest {
         validProduct.setPrice(5.99f);
         validProduct.setCurrency("lei");
         validProduct.setType(ProductType.ICE_CREAM);
-        validProduct.setCategoryId(100L);
     }
 
     @Test

@@ -1,4 +1,4 @@
 package com.summerschool.icecreamshop.controller;
-public class CategoryController {
 
+public class BasketController {
 }

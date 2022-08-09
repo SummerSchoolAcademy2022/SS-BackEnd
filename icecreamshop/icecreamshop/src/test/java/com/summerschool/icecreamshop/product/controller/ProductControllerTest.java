@@ -6,11 +6,14 @@ import com.summerschool.icecreamshop.service.ProductService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -18,8 +21,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.Optional;
 
+@RunWith(SpringRunner.class)
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(ProductController.class)
+@AutoConfigureMockMvc
 class ProductControllerTest {
 
     @MockBean
@@ -31,7 +36,7 @@ class ProductControllerTest {
     @Test
     void givenIdWhenFindByIdThenStatusIsOk() throws Exception {
 
-        Integer idProduct = 1;
+        Long idProduct = 1L;
         Product product = new Product();
         product.setId(Long.valueOf(idProduct));
 
@@ -45,7 +50,7 @@ class ProductControllerTest {
     @Test
     void givenIdWhenFindByIdThenStatusIsNotFound() throws Exception {
 
-        Integer idProduct = -100;
+        Long idProduct = -100L;
 
         Mockito.when(productService.findById(idProduct)).thenReturn(Optional.empty());
 

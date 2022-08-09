@@ -20,7 +20,7 @@ public class ProductController {
     ProductService productService;
 
     @GetMapping("/{productId}")
-    public ResponseEntity<Product> readById(@PathVariable Integer productId) {
+    public ResponseEntity<Product> readById(@PathVariable Long productId) {
         Optional<Product> optionalProduct = productService.findById(productId);
         return optionalProduct.map(product -> new ResponseEntity<>(product, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }

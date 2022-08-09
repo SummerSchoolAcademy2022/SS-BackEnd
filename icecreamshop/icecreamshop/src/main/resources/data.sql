@@ -10,9 +10,6 @@ VALUES (3, 'DONUTS', 'Delicious donuts!');
 INSERT INTO CATEGORY (id, name, description)
 VALUES (4, 'MERCHANDISE', 'Cool merch.');
 
---INSERT INTO PRODUCT(ID, TITLE, SHORT_DESCRIPTION, LONG_DESCRIPTION, INGREDIENTS, QUANTITY, ALERGENS, PRICE, CURRENCY, PHOTO_URL, TYPE, CATEGORY_ID)
---VALUES (1,'A','B','C','D',1,'E',10,'F','H', 1,1);
-
 INSERT INTO PRODUCT(ID, TITLE, SHORT_DESCRIPTION, LONG_DESCRIPTION, INGREDIENTS, QUANTITY, ALERGENS, PRICE, CURRENCY, PHOTO_URL, TYPE, CATEGORY_ID)
 VALUES(1,'Pistachio Ice Cream','Sweet, cold, and creamy with a chance of Pistachio flavour','Treat yourself to ice cream infused with smooth Bourbon sprinkled with pistachio and vanilla','egg yolks, sugar, heavy cream, evaporate milk,teaspoon salt, teaspoons vanilla extract,teaspoon pure almond extract, shelled pistachios, roughly chopped',10,'Milk, egg',2.0,'$','../../assets/icecream.png',1,1);
 

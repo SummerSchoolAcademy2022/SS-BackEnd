@@ -10,7 +10,7 @@ public class Rate {
     private int rate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "productId", nullable = false)
+    @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
     public long getId() {

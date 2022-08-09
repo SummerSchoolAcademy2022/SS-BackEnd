@@ -1,6 +1,7 @@
 package com.summerschool.icecreamshop.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -10,8 +11,9 @@ public class Category {
     private Long id;
     private String name;
     private String description;
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Product> product;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Product> product = new ArrayList<>();
 
     public long getId() {
         return id;

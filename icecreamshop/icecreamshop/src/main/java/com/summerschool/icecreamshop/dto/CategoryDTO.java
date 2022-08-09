@@ -12,7 +12,6 @@ public class CategoryDTO {
 
     private String description;
 
-    private List<ProductDTO> products;
 
 
     public CategoryDTO() {
@@ -22,7 +21,6 @@ public class CategoryDTO {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.products = products;
     }
 
     public Long getId() {
@@ -47,14 +45,6 @@ public class CategoryDTO {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public List<ProductDTO> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<ProductDTO> products) {
-        this.products = products;
     }
 
     }

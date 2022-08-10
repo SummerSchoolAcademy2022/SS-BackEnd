@@ -1,6 +1,7 @@
 package com.summerschool.icecreamshop.controller;
 
 import com.summerschool.icecreamshop.dto.ProductDTO;
+import com.summerschool.icecreamshop.model.Category;
 import com.summerschool.icecreamshop.model.Product;
 
 import com.summerschool.icecreamshop.dto.ProductDTO;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
@@ -28,6 +30,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(path = "/products")
 public class ProductController {
+
     private ProductService productService;
 
     private ModelMapper modelMapper;
@@ -51,6 +54,6 @@ public class ProductController {
     @GetMapping("/{productId}")
     public ResponseEntity<ProductDTO> readById(@PathVariable("productId") Long productId) {
         Optional<Product> productOptional = productService.findById(productId);
-        return productOptional.map(product -> ResponseEntity.ok(product.convertToProductDTO())).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        return productOptional.map(product -> ResponseEntity.ok(modelMapper.map(product, ProductDTO.class))).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }

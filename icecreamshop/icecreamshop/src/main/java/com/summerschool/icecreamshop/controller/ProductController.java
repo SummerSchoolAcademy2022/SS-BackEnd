@@ -4,6 +4,7 @@ package com.summerschool.icecreamshop.controller;
 
 import com.summerschool.icecreamshop.dto.ProductDTO;
 
+import com.summerschool.icecreamshop.model.Product;
 import com.summerschool.icecreamshop.service.ProductService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,4 +39,16 @@ public class ProductController {
                 .map(product -> modelMapper.map(product, ProductDTO.class))
                 .collect(Collectors.toList()));
     }
+
+    @PostMapping("/products")
+    public ResponseEntity getProducts(@RequestBody Product product){
+        if(productService.isProductValid(product)){
+            productService.add(product);
+            return (ResponseEntity) ResponseEntity.status(200);
+        } else {
+            return(ResponseEntity) ResponseEntity.status(400);
+        }
+
+    }
+
 }

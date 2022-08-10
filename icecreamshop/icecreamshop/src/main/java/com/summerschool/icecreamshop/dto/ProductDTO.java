@@ -1,16 +1,10 @@
-package com.summerschool.icecreamshop.model;
+package com.summerschool.icecreamshop.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.summerschool.icecreamshop.model.ProductType;
 
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-@Entity
-public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+public class ProductDTO {
     private Long id;
     private String title;
     private String shortDescription;
@@ -21,19 +15,24 @@ public class Product {
     private double price;
     private String currency;
     private String photoUrl;
-    @Enumerated(EnumType.STRING)
     private ProductType type;
 
-    @JsonIgnoreProperties({"hibernateLazyInitializer"})
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", nullable = false)
-    private Category category;
-
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<BasketProduct> basketProduct = new ArrayList<>();
-
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Rate> rate = new ArrayList<>();
+    public ProductDTO(Long id, String title, String shortDescription,
+                      String longDescription, String ingredients,
+                      int quantity, String alergens, double price,
+                      String currency, String photoUrl, ProductType type) {
+        this.id = id;
+        this.title = title;
+        this.shortDescription = shortDescription;
+        this.longDescription = longDescription;
+        this.ingredients = ingredients;
+        this.quantity = quantity;
+        this.alergens = alergens;
+        this.price = price;
+        this.currency = currency;
+        this.photoUrl = photoUrl;
+        this.type = type;
+    }
 
     public Long getId() {
         return id;
@@ -121,29 +120,5 @@ public class Product {
 
     public void setType(ProductType type) {
         this.type = type;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public List<BasketProduct> getBasketProduct() {
-        return basketProduct;
-    }
-
-    public void setBasketProduct(List<BasketProduct> basketProduct) {
-        this.basketProduct = basketProduct;
-    }
-
-    public List<Rate> getRate() {
-        return rate;
-    }
-
-    public void setRate(List<Rate> rate) {
-        this.rate = rate;
     }
 }

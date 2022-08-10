@@ -1,11 +1,12 @@
 package com.summerschool.icecreamshop.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 public class Rate {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int rate;
 

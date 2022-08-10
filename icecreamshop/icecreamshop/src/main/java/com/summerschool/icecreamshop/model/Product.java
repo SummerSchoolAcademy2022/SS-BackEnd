@@ -1,11 +1,9 @@
 package com.summerschool.icecreamshop.model;
 
-
-import com.summerschool.icecreamshop.dto.ProductDTO;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,30 +12,26 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank(message = "title may be blank")
     private String title;
-    @NotBlank(message = "shortDescription may be blank")
     private String shortDescription;
     private String longDescription;
     private String ingredients;
-    @NotNull(message = "quantity may be null")
     private int quantity;
     private String alergens;
-    @NotNull(message = "price may be null")
     private double price;
-    @NotBlank(message = "currency may be blank")
     private String currency;
     private String photoUrl;
-    @Enumerated
-    @NotNull(message = "Type may be null")
+    @Enumerated(EnumType.STRING)
     private ProductType type;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"hibernateLazyInitializer"})
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BasketProduct> basketProduct = new ArrayList<>();
+
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Rate> rate = new ArrayList<>();
 
@@ -151,20 +145,5 @@ public class Product {
 
     public void setRate(List<Rate> rate) {
         this.rate = rate;
-    }
-
-    public ProductDTO convertToProductDTO() {
-        ProductDTO productDTO = new ProductDTO();
-        productDTO.setId(id);
-        productDTO.setTitle(title);
-        productDTO.setShortDescription(shortDescription);
-        productDTO.setLongDescription(longDescription);
-        productDTO.setIngredients(ingredients);
-        productDTO.setAlergens(alergens);
-        productDTO.setPrice(price);
-        productDTO.setCurrency(currency);
-        productDTO.setPhotoUrl(photoUrl);
-        productDTO.setType(type);
-        return productDTO;
     }
 }

@@ -3,8 +3,10 @@ package com.summerschool.icecreamshop.dto;
 import com.summerschool.icecreamshop.model.ProductType;
 
 
-
 public class ProductDTO {
+    public ProductDTO() {
+    }
+
     private Long id;
     private String title;
     private String shortDescription;

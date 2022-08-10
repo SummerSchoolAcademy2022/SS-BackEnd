@@ -1,13 +1,16 @@
 package com.summerschool.icecreamshop.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Product {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String shortDescription;
@@ -18,8 +21,10 @@ public class Product {
     private double price;
     private String currency;
     private String photoUrl;
+    @Enumerated(EnumType.STRING)
     private ProductType type;
 
+    @JsonIgnoreProperties({"hibernateLazyInitializer"})
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;

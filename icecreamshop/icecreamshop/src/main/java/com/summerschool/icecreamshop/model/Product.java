@@ -1,7 +1,7 @@
 package com.summerschool.icecreamshop.model;
 
 
-import com.summerschool.icecreamshop.dto.ProductDto;
+import com.summerschool.icecreamshop.dto.ProductDTO;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -152,8 +152,8 @@ public class Product {
         this.rate = rate;
     }
 
-    public ProductDto convertToProductDto(Product product) {
-        return new ProductDto(
+    public ProductDTO convertToProductDto(Product product) {
+        return new ProductDTO(
                 id = product.getId(),
                 title = product.getTitle(),
                 shortDescription = product.getShortDescription(),

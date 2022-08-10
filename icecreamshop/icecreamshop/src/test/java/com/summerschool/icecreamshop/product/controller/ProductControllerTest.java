@@ -3,7 +3,7 @@ package com.summerschool.icecreamshop.product.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.summerschool.icecreamshop.controller.ProductController;
-import com.summerschool.icecreamshop.dto.ProductDto;
+import com.summerschool.icecreamshop.dto.ProductDTO;
 import com.summerschool.icecreamshop.model.Product;
 import com.summerschool.icecreamshop.model.ProductType;
 import com.summerschool.icecreamshop.repository.ProductRepository;
@@ -87,11 +87,7 @@ class ProductControllerTest {
 
         Mockito.when(productRepository.findById(idProduct)).thenReturn(Optional.of(validProduct));
 
-        ProductDto productDto = productService.findById(idProduct);
-
-        if(productDtovalidProduct.convertToProductDto(validProduct)) {
-
-        }
+        ProductDTO productDTO = productService.findById(idProduct).get().convertToProductDto();
 
         mockMvc.perform(get("/products/" + idProduct))
                 .andExpect(status().isOk())

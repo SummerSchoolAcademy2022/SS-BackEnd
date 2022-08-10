@@ -1,12 +1,14 @@
 package com.summerschool.icecreamshop.dto;
 
+import com.summerschool.icecreamshop.model.BasketProduct;
+import com.summerschool.icecreamshop.model.Category;
+import com.summerschool.icecreamshop.model.ProductType;
 
-import com.summerschool.icecreamshop.model.*;
 
-import java.util.ArrayList;
-import java.util.List;
+public class ProductDTO {
+    public ProductDTO() {
+    }
 
-public class ProductDto {
     private Long id;
     private String title;
     private String shortDescription;
@@ -19,11 +21,22 @@ public class ProductDto {
     private String photoUrl;
     private ProductType type;
 
-    private Category category;
-
-    private List<BasketProduct> basketProduct = new ArrayList<>();
-
-    private List<Rate> rate = new ArrayList<>();
+    public ProductDTO(Long id, String title, String shortDescription,
+                      String longDescription, String ingredients,
+                      int quantity, String alergens, double price,
+                      String currency, String photoUrl, ProductType type, Category category, BasketProduct basketProduct,) {
+        this.id = id;
+        this.title = title;
+        this.shortDescription = shortDescription;
+        this.longDescription = longDescription;
+        this.ingredients = ingredients;
+        this.quantity = quantity;
+        this.alergens = alergens;
+        this.price = price;
+        this.currency = currency;
+        this.photoUrl = photoUrl;
+        this.type = type;
+    }
 
     public Long getId() {
         return id;
@@ -111,46 +124,5 @@ public class ProductDto {
 
     public void setType(ProductType type) {
         this.type = type;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public List<BasketProduct> getBasketProduct() {
-        return basketProduct;
-    }
-
-    public void setBasketProduct(List<BasketProduct> basketProduct) {
-        this.basketProduct = basketProduct;
-    }
-
-    public List<Rate> getRate() {
-        return rate;
-    }
-
-    public void setRate(List<Rate> rate) {
-        this.rate = rate;
-    }
-
-    public ProductDto(Long id, String title, String shortDescription, String longDescription, String ingredients, int quantity, String alergens, double price, String currency, String photoUrl, ProductType type, Category category, List<BasketProduct> basketProduct, List<Rate> rate) {
-        this.id = id;
-        this.title = title;
-        this.shortDescription = shortDescription;
-        this.longDescription = longDescription;
-        this.ingredients = ingredients;
-        this.quantity = quantity;
-        this.alergens = alergens;
-        this.price = price;
-        this.currency = currency;
-        this.photoUrl = photoUrl;
-        this.type = type;
-        this.category = category;
-        this.basketProduct = basketProduct;
-        this.rate = rate;
     }
 }

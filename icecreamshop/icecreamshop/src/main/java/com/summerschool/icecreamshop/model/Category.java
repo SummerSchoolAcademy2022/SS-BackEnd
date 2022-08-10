@@ -12,6 +12,8 @@ public class Category {
     private String name;
     private String description;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Product>  productList = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -35,5 +37,13 @@ public class Category {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Product> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
     }
 }

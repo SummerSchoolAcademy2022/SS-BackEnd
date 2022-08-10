@@ -1,5 +1,17 @@
 package com.summerschool.icecreamshop.controller;
 
+import com.summerschool.icecreamshop.model.Category;
+import com.summerschool.icecreamshop.service.CategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.xml.bind.ValidationException;
+
+@RestController
+@RequestMapping("/categories")
+
 import com.summerschool.icecreamshop.dto.CategoryDTO;
 import com.summerschool.icecreamshop.service.CategoryService;
 import com.summerschool.icecreamshop.model.Category;
@@ -41,6 +53,42 @@ public class CategoryController {
         return ResponseEntity.status(HttpStatus.CREATED).body(modelMapper.map(savedCategory, CategoryDTO.class));
     }
 
+    @Autowired
+    CategoryService categoryService;
+    @PostMapping()
+    public ResponseEntity <?> create(@RequestBody Category category ) {
+        try {
+            category= categoryService.createCategory(category);
+        }catch(Exception e){ return ResponseEntity.badRequest().body("Can't create the CATEGORY");
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(category);}
+    @PatchMapping("/category/{categoryId}")
+    public ResponseEntity<Category>update(@RequestBody Category category, @PathVariable Long categoryId) {
+
+        try {
+            return new ResponseEntity<> (categoryService.update(category, categoryId), HttpStatus.OK);
+        } catch (Exception exception) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        }
+    }
+
+    @GetMapping("/{categoryId}")
+    public ResponseEntity <Category> readById(@PathVariable Long categoryId) {
+        try {
+            return new ResponseEntity<> (categoryService.findById(categoryId), HttpStatus.OK);
+        } catch (Exception exception) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        }
+
+
+    }
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(ValidationException.class)
+    String exceptionHandler(ValidationException e) {
+        return e.getMessage();
+    }
     @GetMapping(path = "/{categoryId}")
     public ResponseEntity<CategoryDTO> get(@PathVariable("categoryId") Long id) {
         String CATEGORY_NOT_FOUND = null;
@@ -58,3 +106,4 @@ public class CategoryController {
                 .collect(Collectors.toList()));
     }
 }
+

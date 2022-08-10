@@ -31,12 +31,6 @@ public class ProductController {
     }
 
 
-//@GetMapping("/{productId}")
-//public ResponseEntity<Product> readById(@PathVariable Long productId) {
-//    Optional<Product> optionalProduct = productService.findById(productId);
-//    return optionalProduct.map(product -> new ResponseEntity<>(product, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-//}
-
     @GetMapping
     public ResponseEntity<List<ProductDTO>> getProducts() {
         return ResponseEntity.ok(productService.getAll()

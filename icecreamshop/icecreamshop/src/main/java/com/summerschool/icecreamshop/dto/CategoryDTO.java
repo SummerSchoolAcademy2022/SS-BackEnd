@@ -1,18 +1,27 @@
-package com.summerschool.icecreamshop.model;
+package com.summerschool.icecreamshop.dto;
 
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.ArrayList;
+import com.sun.istack.NotNull;
+
 import java.util.List;
 
-@Entity
-public class Category {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CategoryDTO {
     private Long id;
+
+    @NotNull
     private String name;
+
     private String description;
 
+
+
+    public CategoryDTO() {
+    }
+
+    public CategoryDTO(Long id, String name, String description, List<ProductDTO> products) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+    }
 
     public Long getId() {
         return id;
@@ -37,4 +46,6 @@ public class Category {
     public void setDescription(String description) {
         this.description = description;
     }
-}
+
+    }
+

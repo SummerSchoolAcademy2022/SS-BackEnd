@@ -1,8 +1,6 @@
 package com.summerschool.icecreamshop.model;
 
 
-import com.summerschool.icecreamshop.dto.ProductDTO;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -152,21 +150,5 @@ public class Product {
         this.rate = rate;
     }
 
-    public ProductDTO convertToProductDto(Product product) {
-        return new ProductDTO(
-                id = product.getId(),
-                title = product.getTitle(),
-                shortDescription = product.getShortDescription(),
-                longDescription = product.getLongDescription(),
-                ingredients = product.getIngredients(),
-                quantity = product.getQuantity(),
-                alergens = product.getAlergens(),
-                price = product.getPrice(),
-                currency = product.getCurrency(),
-                photoUrl = product.getPhotoUrl(),
-                type = product.getType(),
-                category = product.getCategory(),
-                basketProduct = product.getBasketProduct(),
-                rate = product.getRate());
-    }
+
 }

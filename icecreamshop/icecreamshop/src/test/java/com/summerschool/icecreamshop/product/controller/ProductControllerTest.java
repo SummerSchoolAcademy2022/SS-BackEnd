@@ -3,7 +3,6 @@ package com.summerschool.icecreamshop.product.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.summerschool.icecreamshop.controller.ProductController;
-import com.summerschool.icecreamshop.dto.ProductDTO;
 import com.summerschool.icecreamshop.model.Product;
 import com.summerschool.icecreamshop.model.ProductType;
 import com.summerschool.icecreamshop.repository.ProductRepository;
@@ -31,8 +30,6 @@ import java.util.Optional;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @ExtendWith(SpringExtension.class)
@@ -87,7 +84,7 @@ class ProductControllerTest {
 
         Mockito.when(productRepository.findById(idProduct)).thenReturn(Optional.of(validProduct));
 
-        ProductDTO productDTO = productService.findById(idProduct).get().convertToProductDto();
+        //ProductDTO productDTO = productService.findById(idProduct).get().convertToProductDto();
 
         mockMvc.perform(get("/products/" + idProduct))
                 .andExpect(status().isOk())

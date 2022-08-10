@@ -16,7 +16,6 @@ public class ProductController {
 
     @Autowired
     ProductService productService;
-
     @PostMapping()
     public ResponseEntity<?> create(@RequestBody Product product) {
         try {
@@ -26,8 +25,6 @@ public class ProductController {
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(product);
     }
-
-
     @GetMapping("/{productId}")
     public ResponseEntity<Product> readById(@PathVariable Long productId) {
         Optional<Product> optionalProduct = productService.findById(productId);

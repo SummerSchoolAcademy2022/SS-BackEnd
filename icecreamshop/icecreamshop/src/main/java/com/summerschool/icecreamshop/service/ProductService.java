@@ -39,15 +39,11 @@ public class ProductService {
                 newProduct.setQuantity(newProduct.getQuantity());
                 newProduct.setBasketProduct(newProduct.getBasketProduct());
                 newProduct.setRate(newProduct.getRate());
-
                 newProduct = productRepository.save(newProduct);
-
                 return newProduct;
             } else {
                 throw new ResourceNotFoundException("No employee record exist for given id");
             }
         }
     }
-
-
 }

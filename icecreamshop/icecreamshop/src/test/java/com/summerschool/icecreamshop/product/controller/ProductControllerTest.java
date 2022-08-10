@@ -3,8 +3,10 @@ package com.summerschool.icecreamshop.product.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.summerschool.icecreamshop.controller.ProductController;
+import com.summerschool.icecreamshop.dto.ProductDto;
 import com.summerschool.icecreamshop.model.Product;
 import com.summerschool.icecreamshop.model.ProductType;
+import com.summerschool.icecreamshop.repository.ProductRepository;
 import com.summerschool.icecreamshop.service.ProductService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
@@ -44,6 +46,9 @@ class ProductControllerTest {
     @MockBean
     ProductService productService;
 
+    @MockBean
+    ProductRepository productRepository;
+
     @Autowired
     MockMvc mockMvc;
 
@@ -69,6 +74,24 @@ class ProductControllerTest {
         Long idProduct = validProduct.getId();
 
         Mockito.when(productService.findById(idProduct)).thenReturn(Optional.of(validProduct));
+
+        mockMvc.perform(get("/products/" + idProduct))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("id", Matchers.is(idProduct), Long.class));
+    }
+
+    @Test
+    void givenId_WhenFindById_ThenStatusIsOk2() throws Exception {
+
+        Long idProduct = validProduct.getId();
+
+        Mockito.when(productRepository.findById(idProduct)).thenReturn(Optional.of(validProduct));
+
+        ProductDto productDto = productService.findById(idProduct);
+
+        if(productDtovalidProduct.convertToProductDto(validProduct)) {
+
+        }
 
         mockMvc.perform(get("/products/" + idProduct))
                 .andExpect(status().isOk())

@@ -1,5 +1,6 @@
 package com.summerschool.icecreamshop.controller;
 
+import com.summerschool.icecreamshop.dto.ProductDto;
 import com.summerschool.icecreamshop.model.Product;
 import com.summerschool.icecreamshop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,11 @@ public class ProductController {
     ProductService productService;
 
     @GetMapping("/{productId}")
-    public ResponseEntity<Product> readById(@PathVariable Long productId) {
+    public ResponseEntity<ProductDto> readById(@PathVariable Long productId) {
         Optional<Product> optionalProduct = productService.findById(productId);
-        return optionalProduct.map(product -> new ResponseEntity<>(product, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        ProductDto productDto = optionalProduct.get().convertToProductDto(optionalProduct.get());
+        //return optionalProduct.map(product -> new ResponseEntity<>(product, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        return new ResponseEntity<>(productDto, HttpStatus.OK);
     }
 
     @PatchMapping("/{productId}")

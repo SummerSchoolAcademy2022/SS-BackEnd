@@ -26,6 +26,7 @@ public class Product {
     @NotBlank(message = "currency may be blank")
     private String currency;
     private String photoUrl;
+    @Enumerated
     @NotNull(message = "Type may be null")
     private ProductType type;
 

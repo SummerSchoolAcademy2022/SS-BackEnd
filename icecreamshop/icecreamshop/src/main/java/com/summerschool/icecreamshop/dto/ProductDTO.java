@@ -4,6 +4,9 @@ import com.summerschool.icecreamshop.model.ProductType;
 
 
 public class ProductDTO {
+    public ProductDTO() {
+    }
+
     private Long id;
     private String title;
     private String shortDescription;
@@ -15,9 +18,6 @@ public class ProductDTO {
     private String currency;
     private String photoUrl;
     private ProductType type;
-
-    public ProductDTO() {
-    }
 
     public ProductDTO(Long id, String title, String shortDescription,
                       String longDescription, String ingredients,

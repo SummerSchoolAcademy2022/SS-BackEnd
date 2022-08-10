@@ -1,9 +1,12 @@
 package com.summerschool.icecreamshop.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 import com.summerschool.icecreamshop.dto.ProductDTO;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -32,12 +35,14 @@ public class Product {
     @NotNull(message = "Type may be null")
     private ProductType type;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"hibernateLazyInitializer"})
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BasketProduct> basketProduct = new ArrayList<>();
+
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Rate> rate = new ArrayList<>();
 
@@ -151,20 +156,5 @@ public class Product {
 
     public void setRate(List<Rate> rate) {
         this.rate = rate;
-    }
-
-    public ProductDTO convertToProductDTO() {
-        ProductDTO productDTO = new ProductDTO();
-        productDTO.setId(id);
-        productDTO.setTitle(title);
-        productDTO.setShortDescription(shortDescription);
-        productDTO.setLongDescription(longDescription);
-        productDTO.setIngredients(ingredients);
-        productDTO.setAlergens(alergens);
-        productDTO.setPrice(price);
-        productDTO.setCurrency(currency);
-        productDTO.setPhotoUrl(photoUrl);
-        productDTO.setType(type);
-        return productDTO;
     }
 }

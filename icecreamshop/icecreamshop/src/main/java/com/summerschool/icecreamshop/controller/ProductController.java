@@ -18,11 +18,11 @@ import java.util.Optional;
 public class ProductController {
 
     @Autowired
-    ProductService productService;
+    private ProductService productService;
 
 
     @GetMapping("/{productId}")
-    public ResponseEntity<ProductDTO> readById(@PathVariable Long productId) {
+    public ResponseEntity<ProductDTO> readById(@PathVariable("productId") Long productId) {
         Optional<Product> productOptional = productService.findById(productId);
         return productOptional.map(product -> ResponseEntity.ok(product.convertToProductDTO())).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }

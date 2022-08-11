@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -33,8 +34,7 @@ public class ProductController {
     }
 
 
-    @GetMapping
-    @RequestMapping(path = "/{idProduct}")
+    @GetMapping(path = "/{idProduct}")
     public ResponseEntity<ProductDTO> getProductById(@PathVariable("idProduct") Long idProduct) {
         Optional<Product> optionalProduct = productService.getById(idProduct);
 
@@ -59,4 +59,8 @@ public class ProductController {
         return ResponseEntity.ok(addedProduct);
     }
 
+    @PatchMapping(path = "/{idProduct}")
+    public ResponseEntity updateProduct(@PathVariable("idProduct") Long idProduct, @RequestBody Map<Object, Object> objectMap) {
+        return productService.updateProductWithMap(idProduct, objectMap);
+    }
 }

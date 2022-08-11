@@ -25,20 +25,4 @@ public class ProductService {
         productRepository.save(product);
     }
 
-    public boolean isProductValid(Product product){
-        if (product.getTitle().isEmpty()
-            || product.getShortDescription().isEmpty()
-            || product.getLongDescription().isEmpty()
-            || product.getIngredients().isEmpty()
-            || product.getQuantity() != 0
-            || product.getAlergens().isEmpty()
-            || product.getPrice() != 0
-            || product.getCurrency().isEmpty()
-            || product.getPhotoUrl().isEmpty()) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
 }

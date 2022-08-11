@@ -1,6 +1,4 @@
-
 package com.summerschool.icecreamshop.controller;
-
 
 import com.summerschool.icecreamshop.dto.ProductDTO;
 
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,15 +39,11 @@ public class ProductController {
                 .collect(Collectors.toList()));
     }
 
-    @PostMapping("/products")
-    public ResponseEntity getProducts(@RequestBody Product product){
-        if(productService.isProductValid(product)){
-            productService.add(product);
-            return (ResponseEntity) ResponseEntity.status(200);
-        } else {
-            return(ResponseEntity) ResponseEntity.status(400);
-        }
 
+    @PostMapping
+    public ResponseEntity addProducts(@Valid @RequestBody Product product) {
+        productService.add(product);
+        return (ResponseEntity) ResponseEntity.status(200);
     }
 
 }

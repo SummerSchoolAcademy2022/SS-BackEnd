@@ -11,6 +11,7 @@ public class Rate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @NotNull
     @Range(min = 1, max = 5)
     private int rate;
@@ -20,7 +21,7 @@ public class Rate {
     @NotNull
     private Product product;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

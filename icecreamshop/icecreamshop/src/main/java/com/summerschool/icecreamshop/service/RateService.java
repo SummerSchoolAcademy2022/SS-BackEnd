@@ -3,6 +3,7 @@ package com.summerschool.icecreamshop.service;
 import com.summerschool.icecreamshop.model.Product;
 import com.summerschool.icecreamshop.model.Rate;
 import com.summerschool.icecreamshop.repository.RateRepository;
+import net.bytebuddy.utility.nullability.AlwaysNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

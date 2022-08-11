@@ -2,7 +2,8 @@ package com.summerschool.icecreamshop.service;
 
 import com.summerschool.icecreamshop.model.Product;
 import com.summerschool.icecreamshop.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +14,6 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
-    @Autowired
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
@@ -26,4 +26,7 @@ public class ProductService {
         return productRepository.findById(idProduct);
     }
 
+    public Page<Product> findAll(PageRequest pageRequest) {
+        return productRepository.findAll(pageRequest);
+    }
 }

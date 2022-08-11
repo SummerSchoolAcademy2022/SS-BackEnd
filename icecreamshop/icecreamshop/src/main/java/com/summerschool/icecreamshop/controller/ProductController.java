@@ -41,9 +41,9 @@ public class ProductController {
 
 
     @PostMapping
-    public ResponseEntity addProducts(@Valid @RequestBody Product product) {
-        productService.add(product);
-        return (ResponseEntity) ResponseEntity.status(200);
+    public ResponseEntity addProduct(@Valid @RequestBody Product product) {
+        Product addedProduct = productService.save(product);
+        return ResponseEntity.ok(addedProduct);
     }
 
 }

@@ -1,5 +1,7 @@
 package com.summerschool.icecreamshop.model;
 
+import org.hibernate.validator.constraints.Range;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -10,7 +12,7 @@ public class Rate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    @Size(min = 1, max = 5)
+    @Range(min = 1, max = 5)
     private int rate;
 
     @ManyToOne

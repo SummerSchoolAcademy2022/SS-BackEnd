@@ -2,6 +2,7 @@ package com.summerschool.icecreamshop.controller;
 
 
 import com.summerschool.icecreamshop.dto.RateDTO;
+import com.summerschool.icecreamshop.model.Product;
 import com.summerschool.icecreamshop.model.Rate;
 import com.summerschool.icecreamshop.service.ProductService;
 import com.summerschool.icecreamshop.service.RateService;
@@ -30,14 +31,9 @@ public class RateController {
     }
 
     @PostMapping
-    public ResponseEntity<RateDTO> add(@Valid @RequestBody RateDTO rateDTO) {
-        Rate rate = modelMapper.map(rateDTO, Rate.class);
-
-        Rate savedRate = rateService.add(rate);
-        if (savedRate == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new RateDTO());
-        }
-        return ResponseEntity.status(HttpStatus.CREATED).body(modelMapper.map(savedRate, RateDTO.class));
+    public ResponseEntity saveRate(@Valid @RequestBody Rate rate) {
+        Rate savedRate = rateService.save(rate);
+        return ResponseEntity.ok(savedRate);
     }
 
     @GetMapping("/{id}")

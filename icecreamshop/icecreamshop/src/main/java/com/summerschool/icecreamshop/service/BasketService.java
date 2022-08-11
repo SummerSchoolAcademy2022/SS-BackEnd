@@ -9,18 +9,20 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 @Service
 public class BasketService {
     @Autowired
     BasketRepository basketRepository;
+
     public Basket createBasket(Basket basket) {
         if (basket.getId() == null) {
             basket = basketRepository.save(basket);
-            return  basket;
+            return basket;
         } else {
             Optional<Basket> basketOptional = basketRepository.findById(basket.getId());
 
-            if (basketOptional.isPresent()){
+            if (basketOptional.isPresent()) {
                 Basket newBasket = basketOptional.get();
                 newBasket.setSessionId(basket.getSessionId());
                 newBasket.setBasketProductList(basket.getBasketProductList());
@@ -37,11 +39,8 @@ public class BasketService {
     public List<Basket> findAll() {
         List<Basket> result = (List<Basket>) basketRepository.findAll();
 
-        if (result.size() > 0) {
-            return result;
-        } else {
-            return new ArrayList<>();
-        }
+
+        return result;
     }
 
     public void deleteById(Long id) {

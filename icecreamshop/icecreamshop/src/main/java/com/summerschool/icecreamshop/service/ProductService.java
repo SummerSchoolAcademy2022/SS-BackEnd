@@ -30,7 +30,4 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public Optional<Product> findById(Long id) {
-        return productRepository.findById(id);
-    }
 }

@@ -2,7 +2,6 @@ package com.summerschool.icecreamshop.controller;
 
 
 import com.summerschool.icecreamshop.dto.RateDTO;
-import com.summerschool.icecreamshop.model.Product;
 import com.summerschool.icecreamshop.model.Rate;
 import com.summerschool.icecreamshop.service.ProductService;
 import com.summerschool.icecreamshop.service.RateService;
@@ -11,31 +10,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
+import javax.validation.Valid;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 
 @RestController
 @RequestMapping(path = "/rates")
 public class RateController {
-    private RateService rateService;
-    private ProductService productService;
-
-    private ModelMapper modelMapper;
+    private final RateService rateService;
+    private final ModelMapper modelMapper;
 
     @Autowired
-    public RateController(RateService rateService, ModelMapper modelMapper, ProductService productService) {
+    public RateController(RateService rateService,
+                          ModelMapper modelMapper) {
         this.rateService = rateService;
         this.modelMapper = modelMapper;
-        this.productService = productService;
     }
 
     @PostMapping
-    public ResponseEntity<RateDTO> add(@RequestBody RateDTO rateDTO) {
+    public ResponseEntity<RateDTO> add(@Valid @RequestBody RateDTO rateDTO) {
         Rate rate = modelMapper.map(rateDTO, Rate.class);
 
         Rate savedRate = rateService.add(rate);
@@ -47,25 +42,8 @@ public class RateController {
 
     @GetMapping("/{id}")
     public ResponseEntity<List<Rate>> get(@PathVariable Long id) {
-
-        List<Rate> rateListByProductId = new ArrayList<>();
-        List<Rate> rateList = rateService.getAll();
-
-        for (Rate rate : rateList) {
-            Product product = rate.getProduct();
-            Long productId = product.getId();
-            if (Objects.equals(id, productId)) {
-                rateListByProductId.add(rate);
-            }
-        }
-
-        if (rateListByProductId.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, null);
-        } else {
-            return new ResponseEntity<>(rateListByProductId, HttpStatus.OK);
-        }
+        return rateService.getListOfRates(id);
     }
-
 
     @GetMapping
     public ResponseEntity<List<RateDTO>> getRate() {

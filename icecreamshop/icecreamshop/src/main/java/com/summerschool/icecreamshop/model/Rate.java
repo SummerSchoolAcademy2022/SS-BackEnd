@@ -1,16 +1,21 @@
 package com.summerschool.icecreamshop.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Rate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
+    @Size(min = 1, max = 5)
     private int rate;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
+    @NotNull
     private Product product;
 
     public long getId() {

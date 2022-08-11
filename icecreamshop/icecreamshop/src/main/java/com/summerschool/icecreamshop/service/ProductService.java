@@ -29,4 +29,10 @@ public class ProductService {
     public Page<Product> findAll(PageRequest pageRequest) {
         return productRepository.findAll(pageRequest);
     }
+
+    public Product save(Product product){
+        return productRepository.save(product);
+    }
+
+
 }
